@@ -1,0 +1,141 @@
+# jwt configuration
+jwt:
+  signing-key: qmPlus
+  expires-time: 7d
+  buffer-time: 1d
+  issuer: qmPlus
+
+# zap logger configuration
+zap:
+  level: info
+  format: console
+  prefix: '[new_mall]'
+  director: log
+  showLine: true
+  encode-level: LowercaseColorLevelEncoder
+  stacktrace-key: stacktrace
+  log-in-console: true
+
+# redis configuration
+redis:
+  db: 0
+  addr: 127.0.0.1:6379
+  password: ""
+
+# mongo configuration
+mongo:
+  coll: ''
+  options: ''
+  database: ''
+  username: ''
+  password: ''
+  min-pool-size: 0
+  max-pool-size: 100
+  socket-timeout-ms: 0
+  connect-timeout-ms: 0
+  is-zap: false
+  hosts:
+    - host: ''
+      port: ''
+
+# email configuration
+email:
+  to: xxx@gmail.com
+  port: 465
+  from: xxx@163.com
+  host: smtp.163.com
+  is-ssl: true
+  secret: xxx
+  nickname: test
+
+# system configuration
+system:
+  env: local # Change to public for turn off routing log output.
+  addr: 8888
+  db-type: mysql
+  oss-type: local # OSS type
+  use-redis: false # use redis
+  use-mongo: false     # use mongo
+  use-multipoint: false
+  # IP limit times: 15,000 times an hour
+  iplimit-count: 15000
+  # IP limit for one hour
+  iplimit-time: 3600
+  #  Route global prefix
+  router-prefix: ""
+
+# mysql connect configuration
+mysql:
+  path: 127.0.0.1
+  port: "3306"
+  config: charset=utf8mb4&parseTime=True&loc=Local
+  db-name: new_mall
+  username: root
+  password: root
+  max-idle-conns: 0
+  max-open-conns: 0
+  log-mode: ""
+  log-zap: false
+
+# pgsql connect configuration
+pgsql:
+  path: ""
+  port: ""
+  config: ""
+  db-name: ""
+  username: ""
+  password: ""
+  max-idle-conns: 10
+  max-open-conns: 100
+  log-mode: ""
+  log-zap: false
+
+db-list:
+  - disable: true # Whether to disable
+    type: "" # Database type, currently supports mysql, pgsql
+    alias-name: "" # The name of the database, note: alias-name needs to be unique in db-list
+    path: ""
+    port: ""
+    config: ""
+    db-name: ""
+    username: ""
+    password: ""
+    max-idle-conns: 10
+    max-open-conns: 100
+    log-mode: ""
+    log-zap: false
+
+
+# local configuration
+local:
+  path: uploads/file
+  store-path: uploads/file
+
+# aws s3 configuration (minio compatible)
+aws-s3:
+  bucket: xxxxx-10005608
+  region: ap-southeast
+  endpoint: ""
+  s3-force-path-style: false
+  disable-ssl: false
+  secret-id: your-secret-id
+  secret-key: your-secret-key
+  base-url: new-mall
+  path-prefix: new-mall
+
+# Cross-domain configuration
+# Need to be used with server/initialize/router.go -> `Router.Use(middleware.CorsByRules())`
+cors:
+  mode: strict-whitelist # Release mode: allow-all, release all; whitelist, whitelist mode, add cors header to requests from domain names in the whitelist; strict-whitelist strict whitelist mode, requests outside the whitelist will be rejected
+  whitelist:
+    - allow-origin: example1.com
+      allow-headers: Content-Type,AccessToken,X-CSRF-Token, Authorization, Token,X-Token,X-User-Id
+      allow-methods: POST, GET
+      expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
+
+      allow-credentials: true
+    - allow-origin: example2.com
+      allow-headers: content-type
+      allow-methods: GET, POST
+      expose-headers: Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type
+      allow-credentials: true
