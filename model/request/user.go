@@ -10,18 +10,18 @@ type UserSearch struct {
 	common.PageInfo
 }
 
-type RegisterUserParam struct {
-	LoginName string `json:"loginName"`
-	Password  string `json:"password"`
+type RegisterUserRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }
 
-type UpdateUserInfoParam struct {
-	NickName      string `json:"nickName"`
-	PasswordMd5   string `json:"passwordMd5"`
-	IntroduceSign string `json:"introduceSign"`
+type UpdateUserRequest struct {
+	Username    string `json:"username"`
+	PhoneNumber string `json:"phone_number"`
+	Avatar      string `json:"avatar"`
 }
 
-type UserLoginParam struct {
-	LoginName   string `json:"loginName"`
-	PasswordMd5 string `json:"passwordMd5"`
+type LoginUserRequest struct {
+	Email    string `json:"email"`
+	Password string `json:"password"`
 }

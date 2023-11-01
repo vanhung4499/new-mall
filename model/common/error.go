@@ -93,4 +93,4 @@ func ErrNoPermission(err error) *Error {
 	return NewCustomError(err, fmt.Sprintf("You have no permission"), fmt.Sprintf("ErroNoPermission"))
 }
 
-var RecordNotFound = errors.New("record not found")
+var RecordNotFound = errors.New("Record not found")

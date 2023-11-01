@@ -15,7 +15,6 @@ import (
 // @name                        x-token
 // @BasePath                    /
 func main() {
-
 	global.Viper = core.Viper() // Initialize Viper
 	initialize.OtherInit()
 	global.Log = core.Zap() // Initialize zap log

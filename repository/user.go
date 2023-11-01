@@ -8,15 +8,22 @@ import (
 	"new-mall/model/common"
 )
 
-type UserRepo struct {
+type userRepo struct {
 	db *gorm.DB
 }
 
-func NewUserRepo(db *gorm.DB) *UserRepo {
-	return &UserRepo{db: db}
+func NewUserRepo(db *gorm.DB) *userRepo {
+	return &userRepo{db: db}
 }
 
-func (r *UserRepo) FindWithCondition(
+func (r *userRepo) Create(ctx context.Context, data *model.UserCreate) error {
+	if err := r.db.Create(&data).Error; err != nil {
+		return common.ErrDB(err)
+	}
+	return nil
+}
+
+func (r *userRepo) FindWithCondition(
 	ctx context.Context,
 	conditions map[string]interface{},
 	moreKeys ...string,
@@ -40,7 +47,7 @@ func (r *UserRepo) FindWithCondition(
 	return &data, nil
 }
 
-func (r *UserRepo) ListByCondition(
+func (r *userRepo) ListWithCondition(
 	ctx context.Context,
 	filter *common.Filter,
 	paging *common.Paging,
@@ -49,7 +56,7 @@ func (r *UserRepo) ListByCondition(
 	var result []model.User
 	db := r.db
 	if v := filter.UserId; v > 0 {
-		db = db.Where("user_id = ?", v)
+		db = db.Where("id = ?", v)
 	}
 
 	for i := range moreKeys {
@@ -69,21 +76,18 @@ func (r *UserRepo) ListByCondition(
 	return result, nil
 }
 
-func (r *UserRepo) Create(ctx context.Context, data *model.UserCreate) error {
-	if err := r.db.Create(&data).Error; err != nil {
-		return common.ErrDB(err)
-	}
-	return nil
-}
-
-func (r *UserRepo) Update(ctx context.Context, id int, data *model.UserUpdate) error {
+func (r *userRepo) Update(
+	ctx context.Context,
+	id int,
+	data *model.UserUpdate,
+) error {
 	if err := r.db.Where("id = ?", id).Updates(&data).Error; err != nil {
 		return common.ErrDB(err)
 	}
 	return nil
 }
 
-func (r *UserRepo) Delete(ctx context.Context, id int) error {
+func (r *userRepo) Delete(ctx context.Context, id int) error {
 	if err := r.db.Table(model.User{}.TableName()).
 		Where("id = ?", id).
 		Updates(map[string]interface{}{

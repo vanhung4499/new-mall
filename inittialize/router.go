@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"new-mall/global"
 	"new-mall/middleware"
-	"new-mall/router"
 )
 
 func Routers() *gin.Engine {
@@ -27,8 +26,7 @@ func Routers() *gin.Engine {
 	global.Log.Info("use middleware cors")
 	// Conveniently add routing group prefix for multiple servers to go online.
 	//Mall admin routing
-	adminRouter := router.RouterGroupApp.Manage
-	ManageGroup := Router.Group("manage-api")
+
 	PublicGroup := Router.Group("")
 
 	{
@@ -37,28 +35,6 @@ func Routers() *gin.Engine {
 			c.JSON(200, "ok")
 		})
 	}
-	{
-		// routing initialization
-		adminRouter.InitManageAdminUserRouter(ManageGroup)
-		adminRouter.InitManageGoodsCategoryRouter(ManageGroup)
-		adminRouter.InitManageGoodsInfoRouter(ManageGroup)
-		adminRouter.InitManageCarouselRouter(ManageGroup)
-		adminRouter.InitManageIndexConfigRouter(ManageGroup)
-		adminRouter.InitManageOrderRouter(ManageGroup)
-	}
-	//商城前端路由
-	mallRouter := router.RouterGroupApp.Mall
-	MallGroup := Router.Group("api")
-	{
-		// 商城前端路由
-		mallRouter.InitMallCarouselIndexRouter(MallGroup)
-		mallRouter.InitMallGoodsInfoIndexRouter(MallGroup)
-		mallRouter.InitMallGoodsCategoryIndexRouter(MallGroup)
-		mallRouter.InitMallUserRouter(MallGroup)
-		mallRouter.InitMallUserAddressRouter(MallGroup)
-		mallRouter.InitMallShopCartRouter(MallGroup)
-		mallRouter.InitMallOrderRouter(MallGroup)
-	}
-	global.Log.Info("router register success")
+
 	return Router
 }

@@ -1,14 +1,9 @@
 package common
 
-import "strings"
-
 type Paging struct {
 	Total int64 `json:"total" form:"total"`
 	Page  int   `json:"page" form:"page"`
 	Limit int   `json:"limit" form:"limit"`
-
-	FakeCursor string `json:"cursor" form:"cursor"`
-	NextCursor string `json:"next_cursor"`
 }
 
 func (p *Paging) Fulfill() {
@@ -19,5 +14,4 @@ func (p *Paging) Fulfill() {
 	if p.Limit <= 0 {
 		p.Limit = 50
 	}
-	p.FakeCursor = strings.TrimSpace(p.FakeCursor)
 }
