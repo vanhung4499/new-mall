@@ -12,7 +12,7 @@ type Product struct {
 	CategoryID    uint   `gorm:"not null"`
 	Title         string
 	Info          string `gorm:"size:1000"`
-	ImgPath       string
+	ImagePath     string
 	Price         string
 	DiscountPrice string
 	OnSale        bool `gorm:"default:false"`

@@ -3,7 +3,6 @@ module new-mall
 go 1.20
 
 require (
-	github.com/CocaineCong/gin-mall v0.0.1
 	github.com/aws/aws-sdk-go v1.48.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.9.1

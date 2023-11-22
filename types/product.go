@@ -18,7 +18,7 @@ type ProductCreateReq struct {
 	CategoryID    uint   `form:"category_id" json:"category_id"`
 	Title         string `form:"title" json:"title" `
 	Info          string `form:"info" json:"info" `
-	ImgPath       string `form:"img_path" json:"img_path"`
+	ImagePath     string `form:"image_path" json:"image_path"`
 	Price         string `form:"price" json:"price"`
 	DiscountPrice string `form:"discount_price" json:"discount_price"`
 	OnSale        bool   `form:"on_sale" json:"on_sale"`
@@ -45,14 +45,14 @@ type ProductUpdateReq struct {
 	CategoryID    uint   `form:"category_id" json:"category_id"`
 	Title         string `form:"title" json:"title" `
 	Info          string `form:"info" json:"info" `
-	ImgPath       string `form:"img_path" json:"img_path"`
+	ImagePath     string `form:"image_path" json:"image_path"`
 	Price         string `form:"price" json:"price"`
 	DiscountPrice string `form:"discount_price" json:"discount_price"`
 	OnSale        bool   `form:"on_sale" json:"on_sale"`
 	Num           int    `form:"num" json:"num"`
 }
 
-type ListProductImgReq struct {
+type ListProductImageReq struct {
 	ID uint `json:"id" form:"id"`
 }
 
@@ -62,7 +62,7 @@ type ProductRes struct {
 	CategoryID    uint   `json:"category_id"`
 	Title         string `json:"title"`
 	Info          string `json:"info"`
-	ImgPath       string `json:"img_path"`
+	ImagePath     string `json:"image_path"`
 	Price         string `json:"price"`
 	DiscountPrice string `json:"discount_price"`
 	View          uint64 `json:"view"`
