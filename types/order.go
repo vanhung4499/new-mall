@@ -52,6 +52,6 @@ type OrderListRes struct {
 	Address       string `json:"address"`
 	Type          uint   `json:"type"`
 	Name          string `json:"name"`
-	ImgPath       string `json:"img_path"`
+	ImagePath     string `json:"image_path"`
 	DiscountPrice string `json:"discount_price"`
 }

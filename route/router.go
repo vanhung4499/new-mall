@@ -37,7 +37,6 @@ func NewRouter() *gin.Engine {
 		authed := v1.Group("/")
 		authed.Use(middleware.AuthMiddleware())
 		{
-
 			// User operations
 			authed.POST("user/update", api.UserUpdateHandler())
 			authed.GET("user/show_info", api.ShowUserInfoHandler())
@@ -49,8 +48,8 @@ func NewRouter() *gin.Engine {
 
 			// product operations
 			authed.POST("product/create", api.CreateProductHandler())
-			authed.POST("product/update", api.UpdateProductHandler())
-			authed.POST("product/delete", api.DeleteProductHandler())
+			authed.PUT("product/update", api.UpdateProductHandler())
+			authed.DELETE("product/delete", api.DeleteProductHandler())
 
 			// favorite operations
 			authed.GET("favorite/list", api.ListFavoritesHandler())
@@ -58,23 +57,23 @@ func NewRouter() *gin.Engine {
 			authed.POST("favorite/delete", api.DeleteFavoriteHandler())
 
 			// order operations
-			//authed.POST("orders/create", api.CreateOrderHandler())
-			//authed.GET("orders/list", api.ListOrdersHandler())
-			//authed.GET("orders/show", api.ShowOrderHandler())
-			//authed.POST("orders/delete", api.DeleteOrderHandler())
+			authed.POST("order/create", api.CreateOrderHandler())
+			authed.GET("order/list", api.ListOrdersHandler())
+			authed.GET("order/show", api.ShowOrderHandler())
+			authed.DELETE("order/delete", api.DeleteOrderHandler())
 
 			// cart operations
 			authed.POST("carts/create", api.CreateCartHandler())
 			authed.GET("carts/list", api.ListCartHandler())
 			authed.POST("carts/update", api.UpdateCartHandler())
-			authed.POST("carts/delete", api.DeleteCartHandler())
+			authed.DELETE("carts/delete", api.DeleteCartHandler())
 
 			// address operations
 			authed.POST("addresses/create", api.CreateAddressHandler())
 			authed.GET("addresses/show", api.ShowAddressHandler())
 			authed.GET("addresses/list", api.ListAddressHandler())
-			authed.POST("addresses/update", api.UpdateAddressHandler())
-			authed.POST("addresses/delete", api.DeleteAddressHandler())
+			authed.PUT("addresses/update", api.UpdateAddressHandler())
+			authed.DELETE("addresses/delete", api.DeleteAddressHandler())
 
 			// payment operations
 			//authed.POST("pay", api.OrderPaymentHandler())
