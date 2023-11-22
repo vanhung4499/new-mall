@@ -1,14 +1,13 @@
-package jwt
+package utils
 
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"new-mall/config"
 	"new-mall/constant"
 	"time"
 )
 
-var jwtSecret = []byte(config.Config.EncryptSecret.JwtSecret)
+var jwtSecret = []byte("new-mall")
 
 type Claims struct {
 	ID       uint   `json:"id"`

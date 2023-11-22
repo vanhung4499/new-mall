@@ -2,7 +2,7 @@ system:
   domain: mall
   version: 1.0
   env: "dev"
-  HttpPort: ":5000"
+  HttpPort: ":5001"
   Host: "localhost"
   UploadModel: "local"
 
@@ -41,18 +41,17 @@ encryptSecret:
   phoneSecret: "PhoneSecret"
 
 # aws s3 configuration
-aws-s3:
+awsS3:
   bucket: your-bucket
   region: ap-southeast-1
   endpoint: ""
-  s3-force-path-style: false
-  disable-ssl: false
-  secret-id: your-secret-id
-  secret-key: your-secret-key
-  base-url: ""
-  path-prefix: ""
+  s3ForcePathStyle: false
+  disableSsl: false
+  secretId: your-secret-id
+  secretKey: your-secret-key
+  baseUrl: ""
+  pathPrefix: ""
 
-staticPath:
-  ImageHost: http://127.0.0.1
-  ProductPath: /static/images/product/
-  AvatarPath: /static/images/avatar/
+local:
+  path: http://localhost
+  storePath: /static/upload/

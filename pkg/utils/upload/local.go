@@ -30,7 +30,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 		return "", "", errors.New("function os.MkdirAll() failed, err:" + mkdirErr.Error())
 	}
 	// Concatenate the path and file name
-	p := config.Config.Local.StorePath + "/" + filename
+	storePath := config.Config.Local.StorePath + "/" + filename
 	filepath := config.Config.Local.Path + "/" + filename
 
 	f, openError := file.Open() // Read the file
@@ -40,7 +40,7 @@ func (*Local) UploadFile(file *multipart.FileHeader) (string, string, error) {
 	}
 	defer f.Close() // Create file defer close
 
-	out, createErr := os.Create(p)
+	out, createErr := os.Create(storePath)
 	if createErr != nil {
 		utils.Logger.Error("function os.Create() failed", createErr.Error())
 

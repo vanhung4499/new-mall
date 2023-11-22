@@ -17,9 +17,7 @@ GO_BUILD_LDFLAGS = -X main.version=$(VERSION)
 
 .PHONY: tools
 tools:
-	cd $(AGENT_SOURCE_PATH) && make deps
-	cd $(AGENT_SOURCE_PATH) && \
-	GOOS=$(OS) GOARCH=$(ARCH) $(GO_BUILD) $(GO_BUILD_FLAGS) -ldflags "$(GO_BUILD_LDFLAGS)" -o $(TOOLS_PATH)/$(BINARY)-$(VERSION)-$(OS)-$(ARCH) ./cmd
+	GOOS=$(OS) GOARCH=$(ARCH) $(GO_BUILD) $(GO_BUILD_FLAGS) -ldflags "$(GO_BUILD_LDFLAGS)" -o $(OUTPUT) ./cmd
 
 .PHONY: run
 test:
@@ -29,9 +27,7 @@ test:
 .PHONY: build
 build:
 	@echo "build project to ./$(OUTPUT)"
-	$(GO_BUILD) \
-	-toolexec="$(AGENT_PATH) -config $(AGENT_CONFIG)" \
-	-a -o ./$(OUTPUT) ./cmd
+	$(GO_BUILD) -o ./$(OUTPUT) ./cmd
 
 .PHONY: env-up
 env-up:
@@ -55,7 +51,7 @@ docker-up:
 	--name $(CONTAINER_NAME) \
 	--network host \
 	-d $(IMAGE_NAME)
-	@echo "container run success at localhost:5001"
+	@echo "container run success at localhost:5000"
 
 .PHONY: docker-down
 docker-down:

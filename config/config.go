@@ -32,17 +32,17 @@ type AwsS3 struct {
 	Bucket           string `yaml:"bucket"`
 	Region           string `yaml:"region"`
 	Endpoint         string `yaml:"endpoint"`
-	SecretID         string `yaml:"secret-id"`
-	SecretKey        string `yaml:"secret-key"`
-	BaseURL          string `yaml:"base-url"`
-	PathPrefix       string `yaml:"path-prefix"`
-	S3ForcePathStyle bool   `yaml:"s3-force-path-style"`
-	DisableSSL       bool   `yaml:"disable-ssl"`
+	SecretID         string `yaml:"secretId"`
+	SecretKey        string `yaml:"secretKey"`
+	BaseURL          string `yaml:"baseUrl"`
+	PathPrefix       string `yaml:"pathPrefix"`
+	S3ForcePathStyle bool   `yaml:"s3ForcePathStyle"`
+	DisableSSL       bool   `yaml:"disableSsl"`
 }
 
 type Local struct {
-	Path      string `yaml:"path"`       // local file access path
-	StorePath string `yaml:"store-path"` // Local file storage path
+	Path      string `yaml:"path"`      // local file access path
+	StorePath string `yaml:"storePath"` // Local file storage path
 }
 
 type MySql struct {
@@ -89,7 +89,6 @@ func InitConfig() {
 	workDir, _ := os.Getwd()
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
-	viper.AddConfigPath(workDir + "/config/locales")
 	viper.AddConfigPath(workDir)
 	err := viper.ReadInConfig()
 	if err != nil {

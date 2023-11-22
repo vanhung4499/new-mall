@@ -13,8 +13,8 @@ type Response struct {
 	Error  string      `json:"error"`
 }
 
-// RespSuccess returns a success response with data
-func RespSuccess(ctx *gin.Context, data interface{}, code ...int) *Response {
+// ResSuccess returns a success response with data
+func ResSuccess(ctx *gin.Context, data interface{}, code ...int) *Response {
 	status := e.SUCCESS
 	if code != nil {
 		status = code[0]
@@ -33,8 +33,8 @@ func RespSuccess(ctx *gin.Context, data interface{}, code ...int) *Response {
 	return r
 }
 
-// RespError returns an error response
-func RespError(ctx *gin.Context, err error, data string, code ...int) *Response {
+// ResError returns an error response
+func ResError(ctx *gin.Context, err error, data string, code ...int) *Response {
 	status := e.ERROR
 	if code != nil {
 		status = code[0]
