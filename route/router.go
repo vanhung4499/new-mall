@@ -27,14 +27,14 @@ func NewRouter() *gin.Engine {
 		v1.POST("auth/login", api.UserLoginHandler())
 
 		// Product operation
-		//v1.GET("product/list", api.ListProductsHandler())
-		//v1.GET("product/show", api.ShowProductHandler())
-		//v1.POST("product/search", api.SearchProductsHandler())
-		//v1.GET("product/image/list", api.ListProductImgHandler())
-		//v1.GET("category/list", api.ListCategoryHandler())
-		//v1.GET("carousels", api.ListCarouselsHandler())
+		v1.GET("product/list", api.ListProductsHandler())
+		v1.GET("product/show", api.ShowProductHandler())
+		v1.POST("product/search", api.SearchProductsHandler())
+		v1.GET("product/image/list", api.ListProductImageHandler())
+		v1.GET("category/list", api.ListCategoryHandler())
+		v1.GET("carousels", api.ListCarouselsHandler())
 
-		authed := v1.Group("/") // 需要登陆保护
+		authed := v1.Group("/")
 		authed.Use(middleware.AuthMiddleware())
 		{
 
@@ -48,14 +48,14 @@ func NewRouter() *gin.Engine {
 			authed.POST("user/avatar", api.UploadAvatarHandler())
 
 			// product operations
-			//authed.POST("product/create", api.CreateProductHandler())
-			//authed.POST("product/update", api.UpdateProductHandler())
-			//authed.POST("product/delete", api.DeleteProductHandler())
+			authed.POST("product/create", api.CreateProductHandler())
+			authed.POST("product/update", api.UpdateProductHandler())
+			authed.POST("product/delete", api.DeleteProductHandler())
 
 			// favorite operations
-			//authed.GET("favorites/list", api.ListFavoritesHandler())
-			//authed.POST("favorites/create", api.CreateFavoriteHandler())
-			//authed.POST("favorites/delete", api.DeleteFavoriteHandler())
+			authed.GET("favorite/list", api.ListFavoritesHandler())
+			authed.POST("favorite/create", api.CreateFavoriteHandler())
+			authed.POST("favorite/delete", api.DeleteFavoriteHandler())
 
 			// order operations
 			//authed.POST("orders/create", api.CreateOrderHandler())
@@ -64,10 +64,10 @@ func NewRouter() *gin.Engine {
 			//authed.POST("orders/delete", api.DeleteOrderHandler())
 
 			// cart operations
-			//authed.POST("carts/create", api.CreateCartHandler())
-			//authed.GET("carts/list", api.ListCartHandler())
-			//authed.POST("carts/update", api.UpdateCartHandler())
-			//authed.POST("carts/delete", api.DeleteCartHandler())
+			authed.POST("carts/create", api.CreateCartHandler())
+			authed.GET("carts/list", api.ListCartHandler())
+			authed.POST("carts/update", api.UpdateCartHandler())
+			authed.POST("carts/delete", api.DeleteCartHandler())
 
 			// address operations
 			authed.POST("addresses/create", api.CreateAddressHandler())

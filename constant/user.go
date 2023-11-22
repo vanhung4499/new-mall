@@ -36,7 +36,6 @@ const EncryptMoneyKeyLength = 6
 const UserInitMoney = "10000" // Initial amount 10K
 
 const (
-	UserDefaultAvatarOss   = "https://api.dicebear.com/avatar.svg" // OSS’s default avatar
-	UserDefaultAvatarLocal = "avatar.JPG"                          // Local default avatar
-
+	UserDefaultAvatarOss   = "https://api.dicebear.com/avatar.svg"           // OSS’s default avatar
+	UserDefaultAvatarLocal = "http:localhost:5001:/static/upload/avatar.JPG" // Local default avatar
 )
