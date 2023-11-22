@@ -1,0 +1,58 @@
+system:
+  domain: mall
+  version: 1.0
+  env: "dev"
+  HttpPort: ":5000"
+  Host: "localhost"
+  UploadModel: "local"
+
+mysql:
+  default:
+    dialect: "mysql"
+    dbHost: "127.0.0.1"
+    dbPort: "3306"
+    dbName: "mall_db"
+    userName: "mall"
+    password: "123456"
+    charset: "utf8mb4"
+
+redis:
+  redisDbName: 4
+  redisHost: 127.0.0.1
+  redisPort: 6379
+  redisPassword: 123456
+  redisNetwork: "tcp"
+
+cache:
+  cacheType: redis
+  cacheEmpires: 600
+  cacheWarmUp:
+  cacheServer:
+
+email:
+  address: http://localhost:8080/#/vaild/email/
+  smtpHost:
+  smtpEmail:
+  smtpPass:
+
+encryptSecret:
+  jwtSecret: "JWTSecret"
+  emailSecret: "EmailSecret"
+  phoneSecret: "PhoneSecret"
+
+# aws s3 configuration
+aws-s3:
+  bucket: your-bucket
+  region: ap-southeast-1
+  endpoint: ""
+  s3-force-path-style: false
+  disable-ssl: false
+  secret-id: your-secret-id
+  secret-key: your-secret-key
+  base-url: ""
+  path-prefix: ""
+
+staticPath:
+  ImageHost: http://127.0.0.1
+  ProductPath: /static/images/product/
+  AvatarPath: /static/images/avatar/

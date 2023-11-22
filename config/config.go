@@ -6,17 +6,17 @@ import (
 	"time"
 )
 
-var Config *Conf
+var Config *Server
 
-type Conf struct {
+type Server struct {
 	System        *System           `yaml:"system"`
-	Oss           *Oss              `yaml:"oss"`
 	MySql         map[string]*MySql `yaml:"mysql"`
 	Email         *Email            `yaml:"email"`
 	Redis         *Redis            `yaml:"redis"`
 	EncryptSecret *EncryptSecret    `yaml:"encryptSecret"`
 	Cache         *Cache            `yaml:"cache"`
-	StaticPath    *StaticPath       `yaml:"photoPath"`
+	Local         *Local            `yaml:"local"`
+	AwsS3         *AwsS3            `yaml:"awsS3"`
 }
 
 type System struct {
@@ -28,13 +28,21 @@ type System struct {
 	UploadModel string `yaml:"uploadModel"`
 }
 
-type Oss struct {
-	BucketName      string `yaml:"bucketName"`
-	AccessKeyId     string `yaml:"accessKeyId"`
-	AccessKeySecret string `yaml:"accessKeySecret"`
-	Endpoint        string `yaml:"endPoint"`
-	EndpointOut     string `yaml:"endpointOut"`
-	QiNiuServer     string `yaml:"qiNiuServer"`
+type AwsS3 struct {
+	Bucket           string `yaml:"bucket"`
+	Region           string `yaml:"region"`
+	Endpoint         string `yaml:"endpoint"`
+	SecretID         string `yaml:"secret-id"`
+	SecretKey        string `yaml:"secret-key"`
+	BaseURL          string `yaml:"base-url"`
+	PathPrefix       string `yaml:"path-prefix"`
+	S3ForcePathStyle bool   `yaml:"s3-force-path-style"`
+	DisableSSL       bool   `yaml:"disable-ssl"`
+}
+
+type Local struct {
+	Path      string `yaml:"path"`       // local file access path
+	StorePath string `yaml:"store-path"` // Local file storage path
 }
 
 type MySql struct {
@@ -68,12 +76,6 @@ type EncryptSecret struct {
 	EmailSecret string `yaml:"emailSecret"`
 	PhoneSecret string `yaml:"phoneSecret"`
 	MoneySecret string `yaml:"moneySecret"`
-}
-
-type StaticPath struct {
-	PhotoHost   string `yaml:"photoHost"`
-	ProductPath string `yaml:"productPath"`
-	AvatarPath  string `yaml:"avatarPath"`
 }
 
 type Cache struct {
