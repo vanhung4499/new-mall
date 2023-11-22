@@ -3,6 +3,7 @@ module new-mall
 go 1.20
 
 require (
+	github.com/CocaineCong/gin-mall v0.0.1
 	github.com/aws/aws-sdk-go v1.48.2
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.9.1
@@ -11,7 +12,9 @@ require (
 	github.com/spf13/viper v1.17.0
 	golang.org/x/crypto v0.14.0
 	gopkg.in/mail.v2 v2.3.1
+	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.5
+	gorm.io/plugin/dbresolver v1.5.0
 )
 
 require (
@@ -31,6 +34,7 @@ require (
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-playground/validator/v10 v10.15.5 // indirect
+	github.com/go-sql-driver/mysql v1.7.0 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
@@ -62,5 +66,6 @@ require (
 	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
