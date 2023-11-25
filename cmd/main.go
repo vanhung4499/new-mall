@@ -2,29 +2,22 @@ package main
 
 import (
 	"fmt"
-	"new-mall/config"
-	"new-mall/pkg/utils"
-	"new-mall/repository/cache"
-	"new-mall/repository/db/dao"
-	"new-mall/route"
+	"new-mall/internal/config"
+	"new-mall/internal/database"
+	"new-mall/internal/global"
+	"new-mall/internal/routes"
 )
 
 func main() {
-	loading()
-	r := route.NewRouter()
-	_ = r.Run(config.Config.System.HttpPort)
+	// Loading configuration
+	global.CONFIG = config.LoadConfig()
+	// Loading database
+	global.DB = database.NewDatabase()
+	database.Migrate()
+	// Setup routes
+	r := routes.SetupRoutes()
+
+	// Start server
+	_ = r.Run(global.CONFIG.System.HttpPort)
 	fmt.Println("Start successfully...")
-}
-
-func loading() {
-	config.InitConfig()
-	dao.InitMySQL()
-	cache.InitCache()
-	utils.InitLog()
-	fmt.Println("Loading configuration completed...")
-	go scriptStarting()
-}
-
-func scriptStarting() {
-	// start some scripts
 }

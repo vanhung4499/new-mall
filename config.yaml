@@ -7,14 +7,13 @@ system:
   UploadModel: "local"
 
 mysql:
-  default:
-    dialect: "mysql"
-    dbHost: "127.0.0.1"
-    dbPort: "3306"
-    dbName: "mall_db"
-    userName: "mall"
-    password: "123456"
-    charset: "utf8mb4"
+  dialect: "mysql"
+  dbHost: "127.0.0.1"
+  dbPort: "3306"
+  dbName: "mall_db"
+  userName: "mall"
+  password: "123456"
+  charset: "utf8mb4"
 
 redis:
   redisDbName: 4
@@ -22,6 +21,10 @@ redis:
   redisPort: 6379
   redisPassword: 123456
   redisNetwork: "tcp"
+
+token:
+  accessTokenExpiry: 3600
+  refreshTokenExpiry: 86400
 
 cache:
   cacheType: redis
@@ -54,4 +57,4 @@ awsS3:
 
 local:
   path: http://localhost
-  storePath: /static/upload/
+  storePath: /static/uploadprovider/

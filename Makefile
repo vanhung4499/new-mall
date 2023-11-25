@@ -8,7 +8,7 @@ DIR := $(shell pwd)
 OUTPUT = main
 
 CONTAINER_NAME = new_mall_server
-IMAGE_NAME = new_mall:3.0
+IMAGE_NAME = new_mall:1.0
 
 GO = go
 GO_BUILD = $(GO) build
