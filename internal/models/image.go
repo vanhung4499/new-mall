@@ -9,9 +9,9 @@ import (
 const ImageEntityName = "Image"
 
 type Image struct {
-	gorm.Model
-	ProductID uint `gorm:"not null"`
-	ImageURL  string
+	gorm.Model `json:"-"`
+	ProductID  uint `gorm:"not null"`
+	ImageURL   string
 }
 
 func (Image) TableName() string {

@@ -51,7 +51,7 @@ func (c *ProductController) ListProduct() gin.HandlerFunc {
 			panic(err)
 		}
 
-		ctx.JSON(http.StatusOK, common.NewSuccessResponse(result, paging, filter))
+		ctx.JSON(http.StatusOK, common.NewSuccessResponse(result, filter, paging))
 	}
 }
 

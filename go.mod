@@ -9,13 +9,11 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-playground/validator/v10 v10.16.0
 	github.com/redis/go-redis/v9 v9.3.0
-	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.17.0
 	golang.org/x/crypto v0.15.0
 	gopkg.in/mail.v2 v2.3.1
 	gorm.io/driver/mysql v1.5.2
 	gorm.io/gorm v1.25.5
-	gorm.io/plugin/dbresolver v1.5.0
 )
 
 require (
@@ -32,6 +30,7 @@ require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.3 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
+	github.com/go-faker/faker/v4 v4.2.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect
 	github.com/go-sql-driver/mysql v1.7.0 // indirect

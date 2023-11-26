@@ -14,6 +14,7 @@ func main() {
 	// Loading database
 	global.DB = database.NewDatabase()
 	database.Migrate()
+	//database.Seed()
 	// Setup routes
 	r := routes.SetupRoutes()
 
