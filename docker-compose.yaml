@@ -5,28 +5,47 @@ networks:
         driver: bridge
 
 services:
+  api:
+    container_name: mall-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mall-api:latest
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_USER=mall
+      - MYSQL_PASSWORD=123456
+      - MYSQL_DBNAME=mall_db
+
   mysql:
     container_name: mall-mysql
     image: mysql:latest
+    ports:
+      - "3306:3306"
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=mall_db
       - MYSQL_USER=mall
       - MYSQL_PASSWORD=123456
-    volumes:
-      - ./config/sql:/docker-entrypoint-initdb.d/
-    ports:
-      - "3306:3306"
+#    volumes:
+#      - ./config/sql:/docker-entrypoint-initdb.d/
 
-  redis:
-    container_name: mall-redis
-    image: redis:latest
-    restart: always
-    environment:
-      - REDIS_PASSWORD=123456
-      - ALLOW_EMPTY_PASSWORD=no
-    volumes:
-      - /usr/local/redis:/usr/local/redis
-    ports:
-      - "6379:6379"
+
+#  redis:
+#    container_name: mall-redis
+#    image: redis:latest
+#    restart: always
+#    environment:
+#      - REDIS_PASSWORD=123456
+#      - ALLOW_EMPTY_PASSWORD=no
+#    volumes:
+#      - /usr/local/redis:/usr/local/redis
+#    ports:
+#      - "6379:6379"

@@ -1,0 +1,1321 @@
+{
+	"info": {
+		"_postman_id": "a19a71f2-f3f4-4ea1-8d9d-c72b2573371b",
+		"name": "new-mall",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2816278"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "abcd1234@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/register",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "abcd1234@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/login",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "abcd1234",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}users",
+							"host": [
+								"{{url}}users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "email@qq.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "11111111",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "operation_type",
+									"value": "1",
+									"description": "1 - Bind email. 2 - Unbind email. 3 - Change password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}users/send_email",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"send_email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload Avatar",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/kirito4499/Pictures/tumblr_4374b6944f3ef593dc70f48623bd2e54_b4eb39d7_1280.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}user/avatar",
+							"host": [
+								"{{url}}user"
+							],
+							"path": [
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Confirm Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}users/valid_email?token=",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"valid_email"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}users/:id",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}users/profile",
+							"host": [
+								"{{url}}users"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Get product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}products/:id",
+							"host": [
+								"{{url}}products"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search products",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "info",
+									"value": "包",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}products/?keyword=a&page=1&limit=5",
+							"host": [
+								"{{url}}products"
+							],
+							"path": [
+								""
+							],
+							"query": [
+								{
+									"key": "keyword",
+									"value": "a"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "LV包包",
+									"type": "text"
+								},
+								{
+									"key": "category_id",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "好包包",
+									"type": "text"
+								},
+								{
+									"key": "info",
+									"value": "很好的包包",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "100",
+									"type": "text"
+								},
+								{
+									"key": "discount_price",
+									"value": "200",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/mac/Downloads/9420d1d0-b083-49ad-8128-94e2cf3963b4.jpeg"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/mac/Downloads/10974968_0_final.png"
+								},
+								{
+									"key": "num",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}products",
+							"host": [
+								"{{url}}products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get images",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}product/images/list?id=1",
+							"host": [
+								"{{url}}product"
+							],
+							"path": [
+								"images",
+								"list"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}products?page=2&limit=5",
+							"host": [
+								"{{url}}products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "keyword",
+									"value": "aa",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Favorite",
+			"item": [
+				{
+					"name": "Create favorite",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}favorites",
+							"host": [
+								"{{url}}favorites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List favorites",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}favorites?page=1&limit=5",
+							"host": [
+								"{{url}}favorites"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete favorites",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}favorites/:productId",
+							"host": [
+								"{{url}}favorites"
+							],
+							"path": [
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "14"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Address",
+			"item": [
+				{
+					"name": "Create address",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "address",
+									"value": "abc",
+									"type": "text"
+								},
+								{
+									"key": "street",
+									"value": "TanLap",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "ThuDuc",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "HCM",
+									"type": "text"
+								},
+								{
+									"key": "country",
+									"value": "VN",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "12453245",
+									"type": "text"
+								},
+								{
+									"key": "zip_code",
+									"value": "820000",
+									"type": "text"
+								},
+								{
+									"key": "is_default",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}addresses",
+							"host": [
+								"{{url}}addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get address",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}addresses/:id",
+							"host": [
+								"{{url}}addresses"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update address",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "address",
+									"value": "fzuu",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}addresses/:id",
+							"host": [
+								"{{url}}addresses"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete address",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}addresses/delete",
+							"host": [
+								"{{url}}addresses"
+							],
+							"path": [
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List address",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}addresses/list",
+							"host": [
+								"{{url}}addresses"
+							],
+							"path": [
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "List Cart Item",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}carts/items",
+							"host": [
+								"{{url}}carts"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Cart",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}carts",
+							"host": [
+								"{{url}}carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add to cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "26",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "68.75997075147114",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}carts/add",
+							"host": [
+								"{{url}}carts"
+							],
+							"path": [
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update cart",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "91.87075547713202",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}carts",
+							"host": [
+								"{{url}}carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}carts",
+							"host": [
+								"{{url}}carts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "address_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}orders",
+							"host": [
+								"{{url}}orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}orders",
+							"host": [
+								"{{url}}orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "refresh_token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}orders/:id",
+							"host": [
+								"{{url}}orders"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete order",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}orders/:id",
+							"host": [
+								"{{url}}orders"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Carousel",
+			"item": [
+				{
+					"name": "List carousel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}carousels",
+							"host": [
+								"{{url}}carousels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Carousel",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "123241",
+									"type": "text"
+								},
+								{
+									"key": "image_url",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "target_url",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "product_id",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}carousels/:id",
+							"host": [
+								"{{url}}carousels"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Carousel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}carousels/:id",
+							"host": [
+								"{{url}}carousels"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Carousel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "abcd",
+									"type": "text"
+								},
+								{
+									"key": "image_url",
+									"value": "qwrewqre",
+									"type": "text"
+								},
+								{
+									"key": "target_url",
+									"value": "asdfsafda",
+									"type": "text"
+								},
+								{
+									"key": "product_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}carousels",
+							"host": [
+								"{{url}}carousels"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "List Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}categories",
+							"host": [
+								"{{url}}categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}categories/:id",
+							"host": [
+								"{{url}}categories"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category_name",
+									"value": "Jacket",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}categories",
+							"host": [
+								"{{url}}categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "category_name",
+									"value": "Bomber",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}categories/:id",
+							"host": [
+								"{{url}}categories"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "101"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}ping",
+					"host": [
+						"{{url}}ping"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "localhost:5001/api/v1/"
+		},
+		{
+			"key": "access_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJfaWQiOjYsInJvbGUiOiJST0xFX1VTRVIifSwiZXhwIjoxNzAwOTQxNDI1LCJpYXQiOjE3MDA5Mzc4MjV9.K_m_J068Iir00mOdB68mlR360ZekrgWJkAyLS7pn24k"
+		},
+		{
+			"key": "refresh_token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDE1MzA2MDMsImlzcyI6Im1hbGwifQ.PlnLDn5w3cLBruVKjurYCA_cskO9mEwhiU80s1vdv_o"
+		}
+	]
+}
