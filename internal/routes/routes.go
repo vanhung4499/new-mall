@@ -85,7 +85,7 @@ func SetupRoutes() *gin.Engine {
 			// User operations
 			authedRoutes.PATCH("users", userController.UpdateUser())
 			authedRoutes.GET("users/profile", userController.GetProfile())
-			authedRoutes.GET("users", userController.GetProfile())
+			//authedRoutes.GET("users", userController.ListUser())
 			authedRoutes.GET("users/:id", userController.GetUser())
 			authedRoutes.POST("users/avatar", userController.UploadAvatar())
 
@@ -97,7 +97,7 @@ func SetupRoutes() *gin.Engine {
 			// favorite operations
 			authedRoutes.GET("favorites", favoriteController.ListFavorite())
 			authedRoutes.POST("favorites", favoriteController.CreateFavorite())
-			authedRoutes.DELETE("favorites", favoriteController.DeleteFavorite())
+			authedRoutes.DELETE("favorites/:productID", favoriteController.DeleteFavorite())
 
 			// order operations
 			authedRoutes.POST("orders", orderController.CreateOrder())
@@ -107,9 +107,10 @@ func SetupRoutes() *gin.Engine {
 
 			// cart operations
 			authedRoutes.POST("carts/add", cartController.Add())
+			authedRoutes.GET("carts", cartController.GetCart())
 			authedRoutes.PATCH("carts", cartController.UpdateCart())
 			authedRoutes.DELETE("carts", cartController.DeleteCart())
-			authedRoutes.DELETE("carts/items/:productId", cartController.DeleteCartItem())
+			//authedRoutes.DELETE("carts/items/:productId", cartController.DeleteCartItem())
 
 			// address operations
 			authedRoutes.POST("addresses", addressController.CreateAddress())
@@ -117,6 +118,16 @@ func SetupRoutes() *gin.Engine {
 			authedRoutes.GET("addresses", addressController.ListAddress())
 			authedRoutes.PATCH("addresses/:id", addressController.UpdateAddress())
 			authedRoutes.DELETE("addresses/:id", addressController.DeleteAddress())
+
+			// carousel operations
+			authedRoutes.POST("carousels", carouselController.CreateCarousel())
+			authedRoutes.PATCH("carousels/:id", carouselController.UpdateCarousel())
+			authedRoutes.DELETE("carousels/:id", carouselController.DeleteCarousel())
+
+			// category operations
+			authedRoutes.POST("categories", categoryController.CreateCategory())
+			authedRoutes.PATCH("categories/:id", categoryController.UpdateCategory())
+			authedRoutes.DELETE("categories/:id", categoryController.DeleteCategory())
 
 		}
 	}

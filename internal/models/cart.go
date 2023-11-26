@@ -10,9 +10,9 @@ const CartEntityName = "Cart"
 
 type Cart struct {
 	gorm.Model
-	UserID    uint
-	User      User
-	CartItems []CartItem
+	UserID      uint    `gorm:"not null"`
+	TotalAmount float64 `gorm:"default:0"`
+	CartItems   []CartItem
 }
 
 func (Cart) TableName() string {
@@ -20,7 +20,12 @@ func (Cart) TableName() string {
 }
 
 type CartCreate struct {
+	gorm.Model
 	UserID uint `form:"user_id" json:"user_id"`
+}
+
+func (CartCreate) TableName() string {
+	return Cart{}.TableName()
 }
 
 var (

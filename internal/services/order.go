@@ -29,7 +29,7 @@ func NewOrderService(
 	}
 }
 
-func (s *OrderService) CreateOrderFromCart(ctx context.Context, userID uint) error {
+func (s *OrderService) CreateOrderFromCart(ctx context.Context, userID, addressID uint) error {
 	// Find cart
 	condition := map[string]interface{}{"user_id": userID}
 	cart, err := s.CartRepo.FindCartWithCondition(ctx, condition, "CartItems")
@@ -44,31 +44,27 @@ func (s *OrderService) CreateOrderFromCart(ctx context.Context, userID uint) err
 		return models.ErrCartIsEmpty
 	}
 
-	// Calculate total amount
-	var totalAmount float64
-	for _, cartItem := range cartItems {
-		totalAmount += cartItem.Product.Price * float64(cartItem.Quantity)
-	}
-
 	// Create an order
-	newOrder := &models.OrderCreate{
+	order := &models.Order{
 		UserID:      userID,
-		OrderItems:  make([]models.OrderItemCreate, len(cartItems)),
-		TotalAmount: totalAmount,
+		OrderItems:  make([]models.OrderItem, len(cartItems)),
+		TotalAmount: cart.TotalAmount,
+		AddressID:   addressID,
 		Status:      1,
 	}
 
 	// Populate order items
-	for i, cartItem := range cartItems {
-		newOrder.OrderItems[i] = models.OrderItemCreate{
+	for _, cartItem := range cartItems {
+		orderItem := models.OrderItem{
 			ProductID: cartItem.ProductID,
 			Quantity:  cartItem.Quantity,
 			Price:     cartItem.Price,
 		}
+		order.OrderItems = append(order.OrderItems, orderItem)
 	}
 
 	// Save order to database
-	if err = s.OrderRepo.CreateOrder(ctx, newOrder); err != nil {
+	if err = s.OrderRepo.CreateOrder(ctx, order); err != nil {
 		return common.ErrCannotCreateEntity(models.OrderEntityName, err)
 	}
 

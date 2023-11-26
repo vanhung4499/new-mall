@@ -23,7 +23,13 @@ func NewFavoriteService(favoriteRepo *repositories.FavoriteRepository, userRepo 
 }
 
 func (s *FavoriteService) CreateFavorite(ctx context.Context, data *models.FavoriteCreate) error {
-	if err := s.FavoriteRepo.Create(ctx, data); err != nil {
+	_, err := s.FavoriteRepo.FindWithCondition(ctx, map[string]interface{}{"user_id": data.UserID, "product_id": data.ProductID})
+
+	if err == nil {
+		return common.ErrEntityAlreadyExisted(models.FavoriteEntityName, err)
+	}
+
+	if err = s.FavoriteRepo.Create(ctx, data); err != nil {
 		return common.ErrCannotCreateEntity(models.FavoriteEntityName, err)
 	}
 	return nil
@@ -52,15 +58,15 @@ func (s *FavoriteService) ListFavorite(
 	return result, nil
 }
 
-func (s *FavoriteService) DeleteFavorite(ctx context.Context, id uint) error {
+func (s *FavoriteService) DeleteFavorite(ctx context.Context, userId, productID uint) error {
 
-	data, err := s.FavoriteRepo.FindWithCondition(ctx, map[string]interface{}{"id": id})
+	data, err := s.FavoriteRepo.FindWithCondition(ctx, map[string]interface{}{"user_id": userId, "product_id": productID})
 
 	if data == nil {
 		return common.ErrEntityNotFound(models.FavoriteEntityName, err)
 	}
 
-	if err = s.FavoriteRepo.Delete(ctx, id); err != nil {
+	if err = s.FavoriteRepo.Delete(ctx, data.ID); err != nil {
 		return common.ErrCannotDeleteEntity(models.FavoriteEntityName, err)
 	}
 

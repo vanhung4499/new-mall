@@ -42,7 +42,7 @@ func (r *UserRepository) Save(ctx context.Context, user *models.User) error {
 func (r *UserRepository) Create(ctx context.Context, data *models.UserCreate) error {
 	db := r.DB
 	if err := db.
-		Table(data.TableName()).
+		Table(models.UserCreate{}.TableName()).
 		Create(data).Error; err != nil {
 		return common.ErrDB(err)
 	}

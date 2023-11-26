@@ -23,9 +23,11 @@ func (c *AddressController) CreateAddress() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var data models.AddressCreate
 		if err := ctx.ShouldBind(&data); err != nil {
-			// Parameter verification
 			panic(common.ErrInvalidRequest(err))
 		}
+
+		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
+		data.UserID = requester.GetID()
 
 		if err := c.AddressService.CreateAddress(ctx.Request.Context(), &data); err != nil {
 			panic(err)

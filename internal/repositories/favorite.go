@@ -21,7 +21,7 @@ func NewFavoriteRepository(db *gorm.DB) *FavoriteRepository {
 
 func (r *FavoriteRepository) Create(ctx context.Context, data *models.FavoriteCreate) error {
 	if err := r.DB.
-		Model(&models.Favorite{}).
+		Table(models.Favorite{}.TableName()).
 		Create(data).Error; err != nil {
 		return common.ErrDB(err)
 	}
@@ -46,15 +46,15 @@ func (r *FavoriteRepository) FindWithCondition(
 	var result models.Favorite
 
 	db := r.DB
+	db = db.Where(condition)
 
 	for _, key := range moreKeys {
 		db = db.Preload(key)
 	}
 
-	if err := db.Where(condition).First(&result).Error; err != nil {
+	if err := db.First(&result).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, common.RecordNotFound
-
 		}
 		return nil, common.ErrDB(err)
 	}

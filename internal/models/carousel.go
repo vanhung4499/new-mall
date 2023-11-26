@@ -30,10 +30,10 @@ func (CarouselCreate) TableName() string {
 
 type CarouselUpdate struct {
 	gorm.Model
-	Title     string `form:"title" binding:"required"`
-	ImageURL  string `form:"image_url" binding:"required"`
-	TargetURL string `form:"target_url" binding:"required"`
-	ProductID uint   `form:"product_id" binding:"required"`
+	Title     string `form:"title"`
+	ImageURL  string `form:"image_url"`
+	TargetURL string `form:"target_url"`
+	ProductID uint   `form:"product_id"`
 }
 
 func (CarouselUpdate) TableName() string {

@@ -14,6 +14,7 @@ func (Category) TableName() string {
 }
 
 type CategoryCreate struct {
+	gorm.Model
 	CategoryName string `form:"category_name" binding:"required"`
 }
 

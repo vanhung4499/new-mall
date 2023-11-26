@@ -3,7 +3,6 @@ package services
 import (
 	"context"
 	"errors"
-	"gorm.io/gorm"
 	"new-mall/internal/models"
 	"new-mall/internal/repositories"
 	"new-mall/pkg/common"
@@ -58,7 +57,7 @@ func (s *CartService) AddToCart(ctx context.Context, userID uint, data *models.C
 
 	// Check if the user has an existing cart
 	cart, err := s.CartRepo.FindCartWithCondition(ctx, map[string]interface{}{"user_id": userID})
-	if errors.Is(err, gorm.ErrRecordNotFound) {
+	if errors.Is(err, common.RecordNotFound) {
 		// If the user doesn't have a cart, create a new one
 		newCart := models.CartCreate{UserID: userID}
 
@@ -69,6 +68,8 @@ func (s *CartService) AddToCart(ctx context.Context, userID uint, data *models.C
 		return common.ErrCannotGetEntity(models.CartEntityName, err)
 	}
 
+	// Set the cart ID
+	data.CartID = cart.ID
 	// Check if the product is already in the cart
 	var cartItem *models.CartItem
 
@@ -81,7 +82,7 @@ func (s *CartService) AddToCart(ctx context.Context, userID uint, data *models.C
 		if err = s.CartRepo.UpdateCartItem(ctx, cartItem); err != nil {
 			return common.ErrCannotUpdateEntity(models.CartItemEntityName, err)
 		}
-	} else if errors.Is(err, gorm.ErrRecordNotFound) {
+	} else if errors.Is(err, common.RecordNotFound) {
 		// If the product is not in the cart, add a new cart item
 		if err = s.CartRepo.CreateCartItem(ctx, data); err != nil {
 			return common.ErrCannotCreateEntity(models.CartItemEntityName, err)

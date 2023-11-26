@@ -27,6 +27,9 @@ func (c *FavoriteController) CreateFavorite() gin.HandlerFunc {
 			panic(common.ErrInvalidRequest(err))
 		}
 
+		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
+		data.UserID = requester.GetID()
+
 		if err := c.FavoriteService.CreateFavorite(ctx.Request.Context(), &data); err != nil {
 			panic(err)
 		}
@@ -72,12 +75,14 @@ func (c *FavoriteController) ListFavorite() gin.HandlerFunc {
 
 func (c *FavoriteController) DeleteFavorite() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
-		id, err := strconv.Atoi(ctx.Param("id"))
+		id, err := strconv.Atoi(ctx.Param("productID"))
 		if err != nil {
 			panic(common.ErrInvalidRequest(err))
 		}
 
-		if err = c.FavoriteService.DeleteFavorite(ctx.Request.Context(), uint(id)); err != nil {
+		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
+
+		if err = c.FavoriteService.DeleteFavorite(ctx.Request.Context(), requester.GetID(), uint(id)); err != nil {
 			panic(err)
 		}
 

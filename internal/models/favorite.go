@@ -17,8 +17,9 @@ func (Favorite) TableName() string {
 }
 
 type FavoriteCreate struct {
-	UserID    uint `form:"user_id" binding:"required"`
-	ProductID uint `form:"product_id" binding:"required"`
+	gorm.Model
+	UserID    uint `form:"user_id,omitempty"`
+	ProductID uint `form:"product_id"`
 }
 
 func (FavoriteCreate) TableName() string {

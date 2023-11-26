@@ -6,8 +6,8 @@ const AddressEntityName = "Address"
 
 type Address struct {
 	gorm.Model
-	UserID    uint `gorm:"not null" json:"user_id"`
-	Address   string
+	UserID    uint
+	No        string
 	Street    string
 	City      string
 	State     string
@@ -22,15 +22,16 @@ func (Address) TableName() string {
 }
 
 type AddressCreate struct {
-	UserID    uint   `gorm:"not null" form:"user_id" binding:"required"`
-	Address   string `form:"address" binding:"required"`
-	Street    string `form:"street" binding:"required"`
-	City      string `form:"city" binding:"required"`
-	State     string `form:"state" binding:"required"`
-	Country   string `form:"country" binding:"required"`
-	Phone     string `form:"phone" binding:"required"`
-	ZipCode   string `form:"zip_code" binding:"required"`
-	IsDefault bool   // Indicates whether this is the default address for the user
+	gorm.Model
+	UserID    uint   `form:"-"`
+	No        string `form:"no"`
+	Street    string `form:"street"`
+	City      string `form:"city"`
+	State     string `form:"state"`
+	Country   string `form:"country"`
+	Phone     string `form:"phone"`
+	ZipCode   string `form:"zip_code"`
+	IsDefault bool   `form:"is_default"` // Indicates whether this is the default address for the user
 }
 
 func (AddressCreate) TableName() string {
@@ -38,15 +39,15 @@ func (AddressCreate) TableName() string {
 }
 
 type AddressUpdate struct {
-	UserID    uint   `gorm:"not null" form:"user_id" binding:"required"`
-	Address   string `form:"address" binding:"required"`
-	Street    string `form:"street" binding:"required"`
-	City      string `form:"city" binding:"required"`
-	State     string `form:"state" binding:"required"`
-	Country   string `form:"country" binding:"required"`
-	Phone     string `form:"phone" binding:"required"`
-	ZipCode   string `form:"zip_code" binding:"required"`
-	IsDefault bool   // Indicates whether this is the default address for the user
+	UserID    uint   `form:"-"`
+	No        string `form:"no"`
+	Street    string `form:"street"`
+	City      string `form:"city"`
+	State     string `form:"state"`
+	Country   string `form:"country"`
+	Phone     string `form:"phone"`
+	ZipCode   string `form:"zip_code"`
+	IsDefault bool   `form:"is_default"` // Indicates whether this is the default address for the user
 }
 
 func (AddressUpdate) TableName() string {

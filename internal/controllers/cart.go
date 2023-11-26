@@ -24,7 +24,7 @@ func (c *CartController) Add() gin.HandlerFunc {
 
 		var data models.CartItemCreate
 		if err := ctx.ShouldBind(&data); err != nil {
-			panic(err)
+			panic(common.ErrInvalidRequest(err))
 		}
 
 		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
@@ -35,6 +35,20 @@ func (c *CartController) Add() gin.HandlerFunc {
 		}
 
 		ctx.JSON(http.StatusOK, common.SimpleSuccessResponse(true))
+	}
+}
+
+func (c *CartController) GetCart() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+
+		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
+
+		cart, err := c.CartService.GetCart(ctx.Request.Context(), requester.GetID())
+		if err != nil {
+			panic(err)
+		}
+
+		ctx.JSON(http.StatusOK, common.SimpleSuccessResponse(cart))
 	}
 }
 

@@ -23,8 +23,8 @@ redis:
   redisNetwork: "tcp"
 
 token:
-  accessTokenExpiry: 3600
-  refreshTokenExpiry: 86400
+  accessTokenExpiry: 604800
+  refreshTokenExpiry: 2592000
 
 cache:
   cacheType: redis
@@ -57,4 +57,4 @@ awsS3:
 
 local:
   path: http://localhost
-  storePath: /static/uploadprovider/
+  storePath: /static/upload/

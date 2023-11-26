@@ -6,10 +6,9 @@ const CartItemEntityName = "CartItem"
 
 type CartItem struct {
 	gorm.Model
-	CartID    uint `gorm:"not null"`
-	Cart      Cart
-	ProductID uint
-	Product   Product
+	CartID    uint    `gorm:"not null"`
+	ProductID uint    `gorm:"not null"`
+	Product   Product `gorm:"foreignKey:ProductID"`
 	Quantity  int     `gorm:"not null"`
 	Price     float64 `gorm:"not null"`
 }
@@ -19,6 +18,7 @@ func (CartItem) TableName() string {
 }
 
 type CartItemCreate struct {
+	gorm.Model
 	CartID    uint    `form:"cart_id" json:"cart_id"`
 	ProductID uint    `form:"product_id" json:"product_id"`
 	Quantity  int     `form:"quantity" json:"quantity"`
@@ -26,7 +26,7 @@ type CartItemCreate struct {
 }
 
 func (CartItemCreate) TableName() string {
-	return Cart{}.TableName()
+	return CartItem{}.TableName()
 }
 
 type CartItemUpdate struct {
@@ -36,5 +36,5 @@ type CartItemUpdate struct {
 }
 
 func (CartItemUpdate) TableName() string {
-	return Cart{}.TableName()
+	return CartItem{}.TableName()
 }

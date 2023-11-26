@@ -21,12 +21,18 @@ func NewOrderController(orderService *services.OrderService) *OrderController {
 
 func (c *OrderController) CreateOrder() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		var req types.CreateOrderReq
+		if err := ctx.ShouldBind(&req); err != nil {
+			panic(common.ErrInvalidRequest(err))
+		}
+
 		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
 
-		err := c.OrderService.CreateOrderFromCart(ctx.Request.Context(), requester.GetID())
+		err := c.OrderService.CreateOrderFromCart(ctx.Request.Context(), requester.GetID(), uint(req.AddressID))
 		if err != nil {
 			panic(err)
 		}
+
 		ctx.JSON(http.StatusOK, common.SimpleSuccessResponse(true))
 	}
 }
@@ -37,6 +43,7 @@ func (c *OrderController) ListOrder() gin.HandlerFunc {
 		if err := ctx.ShouldBind(&paging); err != nil {
 			panic(common.ErrInvalidRequest(err))
 		}
+		paging.Fulfill()
 
 		requester := ctx.MustGet(common.CurrentUser).(common.Requester)
 

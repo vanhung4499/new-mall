@@ -15,7 +15,6 @@ type Product struct {
 	DiscountPrice float64
 	OnSale        bool `gorm:"default:false"`
 	CategoryID    uint `gorm:"not null"`
-	Category      Category
 	StockQuantity int
 	Images        []Image
 }

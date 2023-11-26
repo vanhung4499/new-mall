@@ -25,7 +25,9 @@ func (r *CartRepository) FindCartWithCondition(
 	moreKeys ...string,
 ) (*models.Cart, error) {
 	db := r.DB
-	db = db.Where(condition)
+	db = db.
+		Table(models.Cart{}.TableName()).
+		Where(condition)
 
 	for _, key := range moreKeys {
 		db = db.Preload(key)
@@ -46,7 +48,9 @@ func (r *CartRepository) FindCartWithCondition(
 
 // Create creates a new shopping cart in the database
 func (r *CartRepository) Create(cart *models.CartCreate) error {
-	if err := r.DB.Create(cart).Error; err != nil {
+	if err := r.DB.
+		Table(models.CartCreate{}.TableName()).
+		Create(cart).Error; err != nil {
 		return common.ErrDB(err)
 	}
 	return nil
@@ -54,10 +58,7 @@ func (r *CartRepository) Create(cart *models.CartCreate) error {
 
 // DeleteCart deletes a user's shopping cart from the database
 func (r *CartRepository) DeleteCart(ctx context.Context, id uint) error {
-	if err := r.DB.
-		Model(&models.Cart{}).
-		Where("id = ?", id).
-		Delete(models.Cart{}).Error; err != nil {
+	if err := r.DB.Delete(&models.Cart{}, id).Error; err != nil {
 		return common.ErrDB(err)
 	}
 
@@ -67,7 +68,7 @@ func (r *CartRepository) DeleteCart(ctx context.Context, id uint) error {
 // CreateCartItem creates a new cart item in the database
 func (r *CartRepository) CreateCartItem(ctx context.Context, cartItem *models.CartItemCreate) error {
 	if err := r.DB.
-		Model(&models.CartItem{}).
+		Table(models.CartItemCreate{}.TableName()).
 		Create(cartItem).Error; err != nil {
 		return common.ErrDB(err)
 	}
@@ -77,7 +78,6 @@ func (r *CartRepository) CreateCartItem(ctx context.Context, cartItem *models.Ca
 // UpdateCartItem updates a cart item in the database
 func (r *CartRepository) UpdateCartItem(ctx context.Context, cartItem *models.CartItem) error {
 	if err := r.DB.
-		Model(&models.CartItem{}).
 		Save(cartItem).Error; err != nil {
 		return common.ErrDB(err)
 	}
@@ -155,24 +155,28 @@ func (r *CartRepository) DeleteCartItemWithCondition(
 
 // RecalculateCartTotal recalculates the total amount of a cart based on the cart items
 func (r *CartRepository) RecalculateCartTotal(cartID uint) error {
-	var totalAmount float64
 
 	// Retrieve the cart items associated with the cart
 	var cartItems []models.CartItem
-	err := r.DB.
+	if err := r.DB.
 		Model(&models.CartItem{}).
 		Where("cart_id = ?", cartID).
-		Find(&cartItems).Error
-
-	if err != nil {
-		return err
+		Find(&cartItems).Error; err != nil {
+		return common.ErrDB(err)
 	}
 
+	totalAmount := 0.0
 	// Calculate the total amount
 	for _, cartItem := range cartItems {
 		totalAmount += cartItem.Price * float64(cartItem.Quantity)
 	}
 
 	// Update the total amount of the cart in the database
-	return r.DB.Model(&models.Cart{}).Update("total_amount", totalAmount).Error
+	if err := r.DB.
+		Model(&models.Cart{}).
+		Where("id = ?", cartID).
+		Update("total_amount", totalAmount).Error; err != nil {
+		return common.ErrDB(err)
+	}
+	return nil
 }

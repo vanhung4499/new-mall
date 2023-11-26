@@ -19,21 +19,11 @@ func NewOrderRepository(db *gorm.DB) *OrderRepository {
 	}
 }
 
-func (r *OrderRepository) CreateOrder(ctx context.Context, order *models.OrderCreate) error {
-	return r.DB.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Create(order).Error; err != nil {
-			return common.ErrDB(err)
-		}
-
-		for _, orderItem := range order.OrderItems {
-			orderItem.OrderID = order.ID
-			if err := tx.Create(&orderItem).Error; err != nil {
-				return common.ErrDB(err)
-			}
-		}
-
-		return nil
-	})
+func (r *OrderRepository) CreateOrder(ctx context.Context, order *models.Order) error {
+	if err := r.DB.Create(order).Error; err != nil {
+		return common.ErrDB(err)
+	}
+	return nil
 }
 
 func (r *OrderRepository) ListWithCondition(
@@ -93,6 +83,7 @@ func (r *OrderRepository) FindWithCondition(
 	var order models.Order
 
 	if err := db.
+		Table(models.Order{}.TableName()).
 		Where(condition).
 		First(&order).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
@@ -111,5 +102,13 @@ func (r *OrderRepository) Delete(ctx context.Context, id uint) error {
 		Delete(&models.Order{}).Error; err != nil {
 		return common.ErrDB(err)
 	}
+
+	if err := r.DB.
+		Model(&models.OrderItem{}).
+		Where("order_id = ?", id).
+		Delete(&models.OrderItem{}).Error; err != nil {
+		return common.ErrDB(err)
+	}
+
 	return nil
 }
