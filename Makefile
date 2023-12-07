@@ -20,6 +20,11 @@ build:
 	echo "build project to ./$(OUTPUT)"
 	go build -o ./$(OUTPUT) ./cmd
 
+.PHONY: build-docker
+build-docker:
+	echo "build project to ./$(OUTPUT)"
+	docker build -t $(IMAGE_NAME) .
+
 .PHONY: compose-up
 compose-up:
 	docker-compose up -d

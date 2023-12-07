@@ -13,8 +13,9 @@ type Product struct {
 	ImageURL      string `gorm:"not null"`
 	Price         float64
 	DiscountPrice float64
-	OnSale        bool `gorm:"default:false"`
-	CategoryID    uint `gorm:"not null"`
+	OnSale        bool     `gorm:"default:false"`
+	CategoryID    uint     `gorm:"not null"`
+	Category      Category `gorm:"foreignKey:CategoryID"`
 	StockQuantity int
 	Images        []Image
 }
